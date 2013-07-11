@@ -64,14 +64,7 @@ class DefaultLocaleResolver implements LocaleResolverInterface
         }
 
         // use accept header for locale matching if sent
-        if ($languages = $request->getLanguages()) {
-            foreach ($languages as $lang) {
-                if (in_array($lang, $availableLocales, true)) {
-                    return $lang;
-                }
-            }
-        }
-
-        return null;
+        $lang = $request->getPreferredLanguage($availableLocales);
+        return $lang;
     }
 }
